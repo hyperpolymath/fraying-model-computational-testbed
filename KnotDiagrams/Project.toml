@@ -1,0 +1,17 @@
+name = "KnotDiagrams"
+uuid = "a7e3c1f0-5d4b-4e8a-9f1c-2b3d4e5f6a7b"
+version = "0.1.0"
+
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+
+[targets]
+test = ["Test"]
+
+[compat]
+DataFrames = "1"
+julia = "1.9"

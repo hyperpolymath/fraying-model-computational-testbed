@@ -1,0 +1,105 @@
+Fraying-Model Fragment-Count Distribution Predictions
+=====================================================
+
+This document states testable predictions about the fragment-count
+distribution L_D(k) for knot diagrams, derived from the combinatorics
+of Kauffman bracket state sums.
+
+Definitions
+-----------
+
+For an n-crossing knot diagram D, the 2^n global resolution states are
+obtained by choosing one of two smoothings at each crossing.  Each state
+yields a collection of k disjoint simple closed curves ("fragments").
+
+  L_D(k) = |{ states s : s produces exactly k fragments }|
+
+The tropical summary is:
+  support(L_D) = { k : L_D(k) > 0 }
+  min, max     = extrema of support
+  |support|    = cardinality
+  class        = "spread" if |support| > 1, "collapse" if |support| = 1
+
+Prediction 1 — No Collapse for Nontrivial Knots
+------------------------------------------------
+
+Every prime knot with crossing number >= 3 has |support| > 1 (is "spread").
+
+Rationale: For an alternating prime knot, the all-A state (Seifert state)
+produces a number of circles related to the genus, while the all-B state
+produces a different count.  The minimum and maximum circle counts in
+the state sum always differ for nontrivial knots.
+
+Prediction 2 — Trefoil (3_1) Has Support {1, 2, 3}
+---------------------------------------------------
+
+The trefoil should produce states with 1, 2, or 3 circles.
+
+  L_{3_1}(1) = 3    (three states yield 1 circle)
+  L_{3_1}(2) = 4    (four states yield 2 circles)
+  L_{3_1}(3) = 1    (one state yields 3 circles)
+
+Verification: the all-0 state (smoothing 0 at every crossing) gives 2
+circles, and the all-1 state gives 3 circles.  Three mixed states give
+1 circle each.  This matches the Kauffman bracket structure for the
+trefoil.
+
+Prediction 3 — Topology Predicts the Distribution
+--------------------------------------------------
+
+Diagrams of different knot types at the same crossing number should
+produce different fragment-count histograms L_D(k).  Specifically:
+
+  5_1  vs  5_2   — different histograms, likely different supports
+  6_1  vs  6_2   — different histograms
+  6_1  vs  6_3   — different histograms
+  6_2  vs  6_3   — different histograms
+  7_i  vs  7_j   — different histograms for i ≠ j (all 21 pairs)
+
+This is the central testable claim: the fragment-count distribution is a
+topological invariant of the diagram (up to diagram equivalence), and
+distinct knot types generally have distinct distributions.
+
+Prediction 4 — Torus Knots Have Wider Support
+----------------------------------------------
+
+Torus knots T(2, 2k+1) have wider support (larger |support|) than
+non-torus knots at the same crossing number.
+
+  5_1 (torus)     — wider support than 5_2 (twist knot)
+  7_1 (torus)     — wider support than 7_2, ..., 7_7
+
+Rationale: the Seifert state of a torus knot produces the minimum
+number of Seifert circles (k+1 for T(2,2k+1)), while the all-opposite
+state produces a larger count.  The spread between min and max is
+maximised for torus knots among alternating knots at a given crossing
+number.
+
+Prediction 5 — Support Range Grows with Crossing Number
+--------------------------------------------------------
+
+For the torus knot series T(2, 2k+1):
+  3_1: |support| around 3
+  5_1: |support| around 4-5
+  7_1: |support| around 5-6
+
+The support range (max - min + 1) grows roughly linearly with crossing
+number for torus knots.
+
+Prediction 6 — The Distribution Refines the Jones Polynomial
+-------------------------------------------------------------
+
+Two knots can share the same Jones polynomial but have different
+fragment-count distributions.  The L_D(k) histogram retains state-level
+information that the polynomial (which sums over states with signs and
+weights) discards.  This makes L_D(k) a finer invariant in some cases.
+
+Expected Outcomes
+-----------------
+
+Running the analysis on all prime knots up to 7 crossings should show:
+  - 14 diagrams, all classified as "spread"
+  - 25 pairwise comparisons (1 + 3 + 21 for n=5,6,7)
+  - Majority of pairs have different supports
+  - All pairs have different histograms (stronger claim)
+  - Torus knots (3_1, 5_1, 7_1) have the widest support at each cn
