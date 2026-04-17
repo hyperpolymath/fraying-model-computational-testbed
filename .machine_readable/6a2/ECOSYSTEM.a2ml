@@ -9,7 +9,7 @@ version = "0.1.0"
 last-updated = "2026-04-11"
 
 [project]
-name = "rsr-template-repo"
+name = "fraying-model-computational-testbed"
 purpose = ""  # TODO: describe project purpose
 role = ""  # TODO: describe project role  # e.g. ffi-infrastructure, cli-tool, library, service
 

@@ -19,9 +19,9 @@ set positional-arguments := true
 import? "contractile.just"
 
 # Project metadata — customize these
-project := "rsr-template-repo"
+project := "fraying-model-computational-testbed"
 OWNER := "hyperpolymath"
-REPO := "rsr-template-repo"
+REPO := "fraying-model-computational-testbed"
 version := "0.1.0"
 tier := "infrastructure"  # 1 | 2 | infrastructure
 
@@ -333,8 +333,8 @@ verify-template:
     fi
 
     # Check for template defaults still present
-    if grep -q 'rsr-template-repo' Justfile 2>/dev/null; then
-        echo "⚠ Justfile still references 'rsr-template-repo' — update project name"
+    if grep -q 'fraying-model-computational-testbed' Justfile 2>/dev/null; then
+        echo "⚠ Justfile still references 'fraying-model-computational-testbed' — update project name"
         FOUND=1
     fi
 
@@ -955,7 +955,7 @@ container-init:
 
     if [ ! -d "container" ]; then
         echo "Error: container/ directory not found."
-        echo "This repo may not have been created from rsr-template-repo."
+        echo "This repo may not have been created from fraying-model-computational-testbed."
         exit 1
     fi
 
@@ -1392,7 +1392,7 @@ assail:
 
 # Self-diagnostic — checks dependencies, permissions, paths
 doctor:
-    @echo "Running diagnostics for rsr-template-repo..."
+    @echo "Running diagnostics for fraying-model-computational-testbed..."
     @echo "Checking required tools..."
     @command -v just >/dev/null 2>&1 && echo "  [OK] just" || echo "  [FAIL] just not found"
     @command -v git >/dev/null 2>&1 && echo "  [OK] git" || echo "  [FAIL] git not found"
@@ -1402,7 +1402,7 @@ doctor:
 
 # Guided tour of key features
 tour:
-    @echo "=== rsr-template-repo Tour ==="
+    @echo "=== fraying-model-computational-testbed Tour ==="
     @echo ""
     @echo "1. Project structure:"
     @ls -la
@@ -1417,12 +1417,12 @@ tour:
 
 # Open feedback channel with diagnostic context
 help-me:
-    @echo "=== rsr-template-repo Help ==="
+    @echo "=== fraying-model-computational-testbed Help ==="
     @echo "Platform: $(uname -s) $(uname -m)"
     @echo "Shell: $SHELL"
     @echo ""
     @echo "To report an issue:"
-    @echo "  https://github.com/hyperpolymath/rsr-template-repo/issues/new"
+    @echo "  https://github.com/hyperpolymath/fraying-model-computational-testbed/issues/new"
     @echo ""
     @echo "Include the output of 'just doctor' in your report."
 
