@@ -61,7 +61,7 @@ Returns a vector of `(state, num_circles)` pairs.
 """
 function enumerate_states(gc::GaussCode)
     n = gc.num_crossings
-    total = 1 << n  # 2^n
+    total = UInt(1) << n  # 2^n
     results = Vector{Tuple{UInt,Int}}(undef, total)
 
     for s in UInt(0):UInt(total - 1)

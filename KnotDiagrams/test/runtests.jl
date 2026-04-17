@@ -202,7 +202,7 @@ using KnotDiagrams
         diagrams = prime_knots_up_to_7()
         for d in diagrams
             fd = fragment_distribution(d)
-            @test fd.summary.classification == :spread "$(d.name) should be spread"
+            @test fd.summary.classification == :spread
         end
     end
 
