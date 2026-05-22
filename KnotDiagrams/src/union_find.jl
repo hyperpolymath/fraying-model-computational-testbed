@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 #
 # Union-Find (Disjoint Set Union) data structure for counting connected
 # components after smoothing a knot diagram. This is the same algorithmic
