@@ -3,11 +3,11 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2025-2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 -->
 
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/{{OPENSSF_PROJECT_ID}}/badge)](https://www.bestpractices.dev/projects/{{OPENSSF_PROJECT_ID}}) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/{{OWNER}}/{{REPO}}/badge)](https://securityscorecards.dev/viewer/?uri=github.com/{{OWNER}}/{{REPO}})
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/{{OPENSSF_PROJECT_ID}}/badge)](https://www.bestpractices.dev/projects/{{OPENSSF_PROJECT_ID}}) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/hyperpolymath/fraying-model-computational-testbed/badge)](https://securityscorecards.dev/viewer/?uri=github.com/hyperpolymath/fraying-model-computational-testbed)
 
 > [!NOTE]
-> This repository is a template. Placeholder tokens like `{{OWNER}}`,
-> `{{REPO}}`, and `{{PROJECT_NAME}}` are expected before running `just`
+> This repository is a template. Placeholder tokens like `hyperpolymath`,
+> `fraying-model-computational-testbed`, and `fraying-model-computational-testbed` are expected before running `just`
 > `init`.
 
 # Overview
