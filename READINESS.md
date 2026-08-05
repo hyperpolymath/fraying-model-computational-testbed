@@ -4,11 +4,11 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 -->
 <!-- Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk> -->
 
-# {{REPO}} Component Readiness Assessment
+# fraying-model-computational-testbed Component Readiness Assessment
 
 **Standard:** [Component Readiness Grades (CRG) v2.2](https://github.com/hyperpolymath/standards/tree/main/component-readiness-grades)
 **Current Grade:** C
-**Assessed:** {{DATE}}
+**Assessed:** 2026-08-05
 **Assessor:** Jonathan D.A. Jewell
 
 ---
@@ -25,7 +25,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
 ## Grade C Evidence
 
-- Deployed and dogfooded on the {{REPO}} project itself
+- Deployed and dogfooded on the fraying-model-computational-testbed project itself
 - CI passing (dogfood-gate, hypatia-scan, static-analysis-gate)
 - TEST-NEEDS.md documents test matrix
 - No home failures
