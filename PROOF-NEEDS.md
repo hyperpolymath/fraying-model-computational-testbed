@@ -65,7 +65,7 @@ The following MUST NOT appear anywhere in proof files:
 | `sorry` | Lean4 | Incomplete proof |
 | `Admitted` | Coq | Incomplete proof |
 | `unsafeCoerce` | Haskell | Unsafe type cast |
-| `Obj.magic` | OCaml/ReScript | Unsafe type cast |
+| `Obj.magic` | OCaml/AffineScript | Unsafe type cast |
 | `unsafe` (unaudited) | Rust | Unsafe block without safety comment |
 
 CI will reject any PR introducing these patterns (enforced by `panic-attack assail`).
