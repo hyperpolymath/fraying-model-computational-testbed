@@ -1,16 +1,23 @@
+# This workflow is managed by gh actions-lock.
+
+# SPDX-License-Identifier: MPL-2.0
 name: Central Estate CI/CD Audit
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: ['**']
+
+permissions:
+  contents: read
 
 jobs:
   estate-audit:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.4.0
       
       - name: Required Files Gate
         uses: hyperpolymath/cicd-suite/actions/required-files-check@main

@@ -1,0 +1,33 @@
+# This workflow is managed by gh actions-lock.
+# SPDX-License-Identifier: MPL-2.0
+name: Repository Validation
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  repository-validation:
+    name: Workflow and session contract validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install verified Nickel 1.17.0
+        run: |
+          mkdir -p "$RUNNER_TEMP/nickel-bin"
+          curl --fail --silent --show-error --location \
+            https://github.com/nickel-lang/nickel/releases/download/1.17.0/nickel-x86_64-linux \
+            --output "$RUNNER_TEMP/nickel-bin/nickel"
+          echo "afcdfa6e0fff31760cf229e85997456c02c00b8b3b84ff38f897ac7b3f39ae34  $RUNNER_TEMP/nickel-bin/nickel" | sha256sum --check --strict
+          chmod +x "$RUNNER_TEMP/nickel-bin/nickel"
+          echo "$RUNNER_TEMP/nickel-bin" >> "$GITHUB_PATH"
+      - name: Check workflow conventions
+        run: bash tests/workflows/validate_workflows_test.sh
+      - name: Evaluate session contracts
+        run: bash scripts/validate-session-contracts.sh
+

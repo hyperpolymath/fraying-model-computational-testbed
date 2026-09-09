@@ -22,13 +22,14 @@ on:
       - 'tests/**'
       - '.github/workflows/e2e.yml'
   pull_request:
-    branches: [main, master]
+    branches: ['**']
     paths:
       - 'src/**'
       - 'ffi/**'
       - 'tests/**'
   workflow_dispatch:
-permissions: read-all
+permissions:
+  contents: read
   actions: read
 concurrency:
   group: e2e-${{ github.ref }}

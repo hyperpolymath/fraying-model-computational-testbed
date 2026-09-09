@@ -1,3 +1,4 @@
+# This workflow is managed by gh actions-lock.
 # SPDX-License-Identifier: MPL-2.0
 name: Hypatia Security Scan
 
@@ -5,7 +6,7 @@ on:
   push:
     branches: [main, master, develop]
   pull_request:
-    branches: [main, master]
+    branches: ['**']
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:

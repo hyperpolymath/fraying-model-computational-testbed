@@ -18,7 +18,7 @@ Audit scope:
 Inventory snapshot at audit time:
 
 * `rsr-template-repo` total tracked files discovered: `240`
-* Session-local binding files discovered: `4` under `session/` plus `coordination.k9`
+* Session-local binding files discovered: `4` under `session/` plus `coordination.k9.ncl`
 
 == Claim Vs Actual
 
@@ -63,7 +63,7 @@ Inventory snapshot at audit time:
 
 | Session-management local binding files
 | target architecture
-| `session/README.md`, `session/custom-checks.k9`, `session/local-hooks.sh`, `coordination.k9`
+| `session/README.md`, `session/custom-checks.k9.ncl`, `session/local-hooks.sh`, `coordination.k9.ncl`
 | exists
 | Added as thin integration layer without protocol duplication.
 | Keep.
@@ -90,7 +90,7 @@ Inventory snapshot at audit time:
 | Keep runtime artifacts out of authoritative standards docs.
 
 | Local policy hooks remain local
-| `session/local-hooks.sh`, `session/custom-checks.k9`
+| `session/local-hooks.sh`, `session/custom-checks.k9.ncl`
 | local session binding layer
 | exists
 | Policy/hook logic separated from central protocol definitions.
@@ -107,10 +107,10 @@ Inventory snapshot at audit time:
 
 * `Justfile` canonical session aliases
 * `session/dispatch.sh`
-* `session/custom-checks.k9`
+* `session/custom-checks.k9.ncl`
 * `session/local-hooks.sh`
 * `session/README.md`
-* `coordination.k9`
+* `coordination.k9.ncl`
 * `AUDIT.adoc` (local gate summary)
 
 === Generated Runtime Artifact
@@ -158,11 +158,11 @@ rsr-template-repo/
   0-AI-MANIFEST.a2ml
   EXPLAINME.adoc
   Justfile
-  coordination.k9
+  coordination.k9.ncl
   session/
     README.md
     dispatch.sh
-    custom-checks.k9
+    custom-checks.k9.ncl
     local-hooks.sh
   docs/
     ... (repo-local human docs)
