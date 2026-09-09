@@ -20,7 +20,7 @@ jobs:
       - name: Install verified Nickel 1.17.0
         run: |
           mkdir -p "$RUNNER_TEMP/nickel-bin"
-          curl --fail --silent --show-error --location \
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location \
             https://github.com/nickel-lang/nickel/releases/download/1.17.0/nickel-x86_64-linux \
             --output "$RUNNER_TEMP/nickel-bin/nickel"
           echo "afcdfa6e0fff31760cf229e85997456c02c00b8b3b84ff38f897ac7b3f39ae34  $RUNNER_TEMP/nickel-bin/nickel" | sha256sum --check --strict

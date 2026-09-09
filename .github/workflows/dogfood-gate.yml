@@ -14,7 +14,6 @@ on:
     branches: [main, master]
 
 permissions:
-  actions: read
   contents: read
 
 jobs:
@@ -41,7 +40,7 @@ jobs:
 
       - name: Validate A2ML manifests
         if: steps.detect.outputs.count > 0
-        uses: hyperpolymath/a2ml-ecosystem/validate-action@main
+        uses: hyperpolymath/deed-ecosystem/validate-action@main
         with:
           path: '.'
           strict: 'false'
@@ -90,7 +89,7 @@ jobs:
 
       - name: Validate K9 contracts
         if: steps.detect.outputs.k9_count > 0
-        uses: hyperpolymath/k9-ecosystem/validate-action@main
+        uses: hyperpolymath/k9-ecosystem/validate-action@codex/science-ci-20260909
         with:
           path: '.'
           strict: 'false'
