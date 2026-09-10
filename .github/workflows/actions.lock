@@ -93,11 +93,13 @@ dependencies:
         repo_id: 259445878
     'hyperpolymath/cicd-suite@main':
         ref: 'main'
-        commit: 'sha1-5eb5ae8edac1a7213470ed40fc87499740476303'
+        commit: 'sha1-0405f138caa8e9ac10bc181f3b46224bbdcda693'
         owner_id: 6759885
         repo_id: 1326697643
         uses:
             - 'hyperpolymath/deed-ecosystem@f7a40a4d5cc82b2e73f861119baa6818d77a448d'
+            - 'hyperpolymath/deed-ecosystem@main'
+            - 'hyperpolymath/k9-ecosystem@main'
     'hyperpolymath/deed-ecosystem@f7a40a4d5cc82b2e73f861119baa6818d77a448d':
         ref: 'main'
         commit: 'sha1-f7a40a4d5cc82b2e73f861119baa6818d77a448d'

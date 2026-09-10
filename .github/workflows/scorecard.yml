@@ -3,6 +3,8 @@
 name: OSSF Scorecard
 
 on:
+  pull_request:
+    branches: ["**"]
   schedule:
     - cron: '0 4 * * *'
   workflow_dispatch:
@@ -13,7 +15,7 @@ permissions:
 
 jobs:
   scorecard:
-    uses: hyperpolymath/standards/.github/workflows/scorecard-reusable.yml@e9fa12b965897f485f8ec143e048a424b52f689a
+    uses: hyperpolymath/standards/.github/workflows/scorecard-reusable.yml@da2c748aad55c1a1dcba00b60fe4a35017bc6540
     permissions:
       contents: read
       security-events: write
