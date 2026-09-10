@@ -250,8 +250,12 @@ init:
         echo "All placeholders replaced successfully!"
     fi
 
-    # These session policies are Nickel K9 documents.
-    bash scripts/validate-session-contracts.sh
+    # CI always provisions Nickel; local initialisation can precede that environment.
+    if command -v nickel >/dev/null; then
+        bash scripts/validate-session-contracts.sh
+    else
+        echo "Session validation deferred: install Nickel 1.17.0, then run bash scripts/validate-session-contracts.sh"
+    fi
 
     echo ""
     echo "Running OpenSSF compliance verification..."
@@ -652,13 +656,8 @@ test-smoke:
 
 # Run end-to-end tests (full pipeline: build → run → verify)
 e2e:
-    @echo "Running E2E tests..."
-    # TODO: Replace with your E2E test command. Examples:
-    #   bash tests/e2e.sh                    # Shell-based E2E
-    #   npx playwright test                  # Browser E2E
-    #   mix test test/integration/e2e_test.exs  # Elixir E2E
-    #   cargo test --test end_to_end         # Rust E2E
-    @echo "E2E tests passed!"
+    @echo "E2E tests are not implemented. Start from tests/templates/e2e.sh.template." >&2
+    @exit 2
 
 # Run aspect tests (cross-cutting concern validation)
 aspect:
@@ -1052,7 +1051,7 @@ validate-rsr:
     for f in .editorconfig .gitignore Justfile README.adoc LICENSE 0-AI-MANIFEST.a2ml; do
         [ -f "$f" ] || MISSING="$MISSING $f"
     done
-    for f in .machine_readable/descriptiles/STATE.a2ml .machine_readable/descriptiles/META.a2ml .machine_readable/descriptiles/ECOSYSTEM.a2ml .machine_readable/anchors/ANCHOR.a2ml .machine_readable/policies/MAINTENANCE-AXES.a2ml .machine_readable/policies/MAINTENANCE-CHECKLIST.a2ml .machine_readable/policies/SOFTWARE-DEVELOPMENT-APPROACH.a2ml; do
+    for f in .machine_readable/descriptiles/STATE.a2ml .machine_readable/descriptiles/META.a2ml .machine_readable/descriptiles/ECOSYSTEM.a2ml .machine_readable/descriptiles/anchor/ANCHOR.a2ml .machine_readable/policies/MAINTENANCE-AXES.a2ml .machine_readable/policies/MAINTENANCE-CHECKLIST.a2ml .machine_readable/policies/SOFTWARE-DEVELOPMENT-APPROACH.a2ml; do
         [ -f "$f" ] || MISSING="$MISSING $f"
     done
     for f in licensing/exhibits/EXHIBIT-A-ETHICAL-USE.txt licensing/exhibits/EXHIBIT-B-QUANTUM-SAFE.txt licensing/texts/MPL-2.0.txt; do

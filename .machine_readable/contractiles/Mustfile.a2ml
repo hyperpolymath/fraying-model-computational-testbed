@@ -68,7 +68,7 @@ hooks fail if any check fails.
 
 ### anchors-directory
 - description: anchors directory exists in 6a2
-- run: test -d .machine_readable/descriptiles/anchors
+- run: test -d .machine_readable/descriptiles/anchor
 - severity: warning
 
 ### self-validating-structure

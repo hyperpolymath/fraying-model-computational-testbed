@@ -28,6 +28,8 @@ jobs:
           echo "$RUNNER_TEMP/nickel-bin" >> "$GITHUB_PATH"
       - name: Check workflow conventions
         run: bash tests/workflows/validate_workflows_test.sh
+      - name: Check Nickel envelope regression controls
+        run: bash tests/workflows/k9_typecheck_test.sh
       - name: Evaluate session contracts
         run: bash scripts/validate-session-contracts.sh
 
