@@ -63,7 +63,7 @@ Inventory snapshot at audit time:
 
 | Session-management local binding files
 | target architecture
-| `session/README.md`, `session/custom-checks.k9.ncl`, `session/local-hooks.sh`, `coordination.k9.ncl`
+| `session/README.adoc`, `session/custom-checks.k9.ncl`, `session/local-hooks.sh`, `coordination.k9.ncl`
 | exists
 | Added as thin integration layer without protocol duplication.
 | Keep.
@@ -83,7 +83,7 @@ Inventory snapshot at audit time:
 | Keep.
 
 | Runtime session artifacts stay per-repo
-| `session/README.md`, `session/dispatch.sh`
+| `session/README.adoc`, `session/dispatch.sh`
 | `.session/` in target repo path
 | exists
 | Dispatcher records canonical commands into runtime `.session/` files.
@@ -109,7 +109,7 @@ Inventory snapshot at audit time:
 * `session/dispatch.sh`
 * `session/custom-checks.k9.ncl`
 * `session/local-hooks.sh`
-* `session/README.md`
+* `session/README.adoc`
 * `coordination.k9.ncl`
 * `AUDIT.adoc` (local gate summary)
 
