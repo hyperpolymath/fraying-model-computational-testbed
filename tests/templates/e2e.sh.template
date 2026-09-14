@@ -8,8 +8,8 @@
 # Customise this file for your project. Delete the examples that don't apply.
 #
 # Usage:
-#   bash tests/e2e.sh
-#   just e2e
+#   bash tests/templates/e2e.sh.template
+# Enable the workflow template only after replacing the examples with real checks.
 #
 # Merge requirements (STANDING): All 6 test categories must pass before merge:
 #   P2P, E2E (this file), aspect, execution, lifecycle, benchmarks
@@ -17,7 +17,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 PASS=0
 FAIL=0
@@ -34,7 +34,7 @@ bold()  { printf '\033[1m%s\033[0m\n' "$*"; }
 # check <label> <expected-substring> <actual>
 check() {
     local name="$1" expected="$2" actual="$3"
-    if echo "$actual" | grep -q "$expected"; then
+    if printf '%s\n' "$actual" | grep -Fq -- "$expected"; then
         green "  PASS: $name"
         PASS=$((PASS + 1))
     else

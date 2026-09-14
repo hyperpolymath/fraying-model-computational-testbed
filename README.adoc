@@ -36,10 +36,10 @@ Canonical command model:
 Local binding files in this template:
 
 * `+session/dispatch.sh+`
-* `+session/custom-checks.k9+`
+* `+session/custom-checks.k9.ncl+`
 * `+session/local-hooks.sh+`
 * `+session/README.md+`
-* `+coordination.k9+`
+* `+coordination.k9.ncl+`
 
 Run `+just+` `+session-help+` for local aliases.
 
@@ -61,7 +61,7 @@ The template keeps a verified interface seam split:
 |`+session/+` |Thin local bindings to central session-management
 standards.
 
-|`+coordination.k9+` |Local coordination wiring to canonical session
+|`+coordination.k9.ncl+` |Local coordination wiring to canonical session
 commands.
 
 |`+docs/+` |Human-facing technical and governance documentation.

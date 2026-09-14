@@ -1,3 +1,4 @@
+K9!
 # SPDX-License-Identifier: MPL-2.0
 # Copyright (c) {{CURRENT_YEAR}} {{AUTHOR}} ({{OWNER}}) <{{AUTHOR_EMAIL}}>
 #
@@ -8,6 +9,17 @@
 # Usage: k9 validate methodology-guard
 
 let methodology_guard = {
+  pedigree = {
+    schema_version = "1.0.0",
+    metadata = {
+      name = "methodology-guard",
+      version = "1.0.0",
+    },
+    security = {
+      leash = 'Kennel,
+    },
+  },
+
   name = "methodology-guard",
   version = "1.0.0",
   description = "Validates that agent work respects declared methodology constraints",
@@ -43,7 +55,7 @@ let methodology_guard = {
     state_not_template = {
       description = "STATE.a2ml must not contain template placeholders",
       severity = "warning",
-      file = ".machine_readable/6a2/STATE.a2ml",
+      file = ".machine_readable/descriptiles/STATE.a2ml",
       reject_patterns = ["{{PLACEHOLDER}}", "{{PROJECT}}", "rsr-template-repo"],
     },
 

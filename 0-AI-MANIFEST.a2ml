@@ -17,9 +17,9 @@ initialization (for example `just init`) or explicitly provides values.
 - Local integration authority (this repo):
   - `Justfile` session recipes
   - `session/dispatch.sh`
-  - `session/custom-checks.k9`
+  - `session/custom-checks.k9.ncl`
   - `session/local-hooks.sh`
-  - `coordination.k9`
+  - `coordination.k9.ncl`
 
 ## Canonical Session Commands
 

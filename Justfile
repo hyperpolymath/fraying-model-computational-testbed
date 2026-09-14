@@ -53,7 +53,7 @@ info:
     @echo "Version: {{version}}"
     @echo "RSR Tier: {{tier}}"
     @echo "Recipes: $(just --summary | wc -w)"
-    @[ -f ".machine_readable/STATE.a2ml" ] && grep -oP 'phase\s*=\s*"\K[^"]+' .machine_readable/STATE.a2ml | head -1 | xargs -I{} echo "Phase: {}" || true
+    @[ -f ".machine_readable/descriptiles/STATE.a2ml" ] && grep -oP 'phase\s*=\s*"\K[^"]+' .machine_readable/descriptiles/STATE.a2ml | head -1 | xargs -I{} echo "Phase: {}" || true
 
 # Run Invariant Path overlay tools for this repository
 invariant-path *ARGS:
@@ -250,11 +250,11 @@ init:
         echo "All placeholders replaced successfully!"
     fi
 
-    # K9-SVC validation (if available)
-    if command -v k9-svc >/dev/null 2>&1; then
-        echo ""
-        echo "Running k9-svc validation..."
-        k9-svc validate . 2>/dev/null || true
+    # CI always provisions Nickel; local initialisation can precede that environment.
+    if command -v nickel >/dev/null; then
+        bash scripts/validate-session-contracts.sh
+    else
+        echo "Session validation deferred: install Nickel 1.17.0, then run bash scripts/validate-session-contracts.sh"
     fi
 
     echo ""
@@ -346,7 +346,7 @@ verify-template:
     fi
 
     # Check for empty SCM files
-    for f in .machine_readable/6a2/STATE.a2ml .machine_readable/6a2/META.a2ml .machine_readable/6a2/ECOSYSTEM.a2ml; do
+    for f in .machine_readable/descriptiles/STATE.a2ml .machine_readable/descriptiles/META.a2ml .machine_readable/descriptiles/ECOSYSTEM.a2ml; do
         if [ -f "$f" ] && grep -q '{{'{{'}}' "$f" 2>/dev/null; then
             echo "⚠ $f still has template placeholders"
             FOUND=1
@@ -408,10 +408,10 @@ self-assess:
         fi
     done
 
-    if [ -d ".machine_readable/6a2" ]; then
-        echo "  ✓ .machine_readable/6a2/ — KEEP (SCM checkpoint files)"
+    if [ -d ".machine_readable/descriptiles" ]; then
+        echo "  ✓ .machine_readable/descriptiles/ — KEEP (SCM checkpoint files)"
     else
-        echo "  ✗ .machine_readable/6a2/ — MISSING (RSR violation!)"
+        echo "  ✗ .machine_readable/descriptiles/ — MISSING (RSR violation!)"
     fi
 
     if [ -d ".github/workflows" ]; then
@@ -564,9 +564,9 @@ verify:
     check_file "LICENSE"
     check_either "CONTRIBUTING.md" "CONTRIBUTING.adoc"
     check_either "README.adoc" "README.md"
-    check_file ".machine_readable/STATE.a2ml"
-    check_file ".machine_readable/META.a2ml"
-    check_file ".machine_readable/ECOSYSTEM.a2ml"
+    check_file ".machine_readable/descriptiles/STATE.a2ml"
+    check_file ".machine_readable/descriptiles/META.a2ml"
+    check_file ".machine_readable/descriptiles/ECOSYSTEM.a2ml"
     check_either "CHANGELOG.md" "CHANGELOG.adoc"
 
     # Check at least 1 workflow exists
@@ -656,13 +656,8 @@ test-smoke:
 
 # Run end-to-end tests (full pipeline: build → run → verify)
 e2e:
-    @echo "Running E2E tests..."
-    # TODO: Replace with your E2E test command. Examples:
-    #   bash tests/e2e.sh                    # Shell-based E2E
-    #   npx playwright test                  # Browser E2E
-    #   mix test test/integration/e2e_test.exs  # Elixir E2E
-    #   cargo test --test end_to_end         # Rust E2E
-    @echo "E2E tests passed!"
+    @echo "E2E tests are not implemented. Start from tests/templates/e2e.sh.template." >&2
+    @exit 2
 
 # Run aspect tests (cross-cutting concern validation)
 aspect:
@@ -1056,7 +1051,7 @@ validate-rsr:
     for f in .editorconfig .gitignore Justfile README.adoc LICENSE 0-AI-MANIFEST.a2ml; do
         [ -f "$f" ] || MISSING="$MISSING $f"
     done
-    for f in .machine_readable/STATE.a2ml .machine_readable/META.a2ml .machine_readable/ECOSYSTEM.a2ml .machine_readable/anchors/ANCHOR.a2ml .machine_readable/policies/MAINTENANCE-AXES.a2ml .machine_readable/policies/MAINTENANCE-CHECKLIST.a2ml .machine_readable/policies/SOFTWARE-DEVELOPMENT-APPROACH.a2ml; do
+    for f in .machine_readable/descriptiles/STATE.a2ml .machine_readable/descriptiles/META.a2ml .machine_readable/descriptiles/ECOSYSTEM.a2ml .machine_readable/descriptiles/anchor/ANCHOR.a2ml .machine_readable/policies/MAINTENANCE-AXES.a2ml .machine_readable/policies/MAINTENANCE-CHECKLIST.a2ml .machine_readable/policies/SOFTWARE-DEVELOPMENT-APPROACH.a2ml; do
         [ -f "$f" ] || MISSING="$MISSING $f"
     done
     for f in licensing/exhibits/EXHIBIT-A-ETHICAL-USE.txt licensing/exhibits/EXHIBIT-B-QUANTUM-SAFE.txt licensing/texts/MPL-2.0.txt; do
@@ -1071,15 +1066,15 @@ validate-rsr:
     for f in docs/governance/MAINTENANCE-CHECKLIST.adoc docs/governance/SOFTWARE-DEVELOPMENT-APPROACH.adoc; do
         [ -f "$f" ] || MISSING="$MISSING $f"
     done
-    if [ -f ".machine_readable/META.a2ml" ]; then
-        grep -q 'axis-1 = "must > intend > like"' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:axis-1"
-        grep -q 'axis-2 = "corrective > adaptive > perfective"' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:axis-2"
-        grep -q 'axis-3 = "systems > compliance > effects"' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:axis-3"
-        grep -q 'scoping-first = true' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:scoping-first"
-        grep -q 'idris-unsound-scan = "believe_me/assert_total"' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:idris-unsound-scan"
-        grep -q 'audit-focus = "systems in place, documentation explains actual state, safety/security accounted for, observed effects reviewed"' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:audit-focus"
-        grep -q 'compliance-focus = "seams/compromises/exception register, bounded exceptions, anti-drift checks"' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:compliance-focus"
-        grep -q 'effects-evidence = "benchmark execution/results and maintainer status dialogue/review"' .machine_readable/META.a2ml || MISSING="$MISSING META.a2ml:effects-evidence"
+    if [ -f ".machine_readable/descriptiles/META.a2ml" ]; then
+        grep -q 'axis-1 = "must > intend > like"' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:axis-1"
+        grep -q 'axis-2 = "corrective > adaptive > perfective"' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:axis-2"
+        grep -q 'axis-3 = "systems > compliance > effects"' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:axis-3"
+        grep -q 'scoping-first = true' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:scoping-first"
+        grep -q 'idris-unsound-scan = "believe_me/assert_total"' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:idris-unsound-scan"
+        grep -q 'audit-focus = "systems in place, documentation explains actual state, safety/security accounted for, observed effects reviewed"' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:audit-focus"
+        grep -q 'compliance-focus = "seams/compromises/exception register, bounded exceptions, anti-drift checks"' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:compliance-focus"
+        grep -q 'effects-evidence = "benchmark execution/results and maintainer status dialogue/review"' .machine_readable/descriptiles/META.a2ml || MISSING="$MISSING META.a2ml:effects-evidence"
         grep -q 'compliance-tooling = "panic-attack"' .machine_readable/policies/MAINTENANCE-AXES.a2ml || MISSING="$MISSING MAINTENANCE-AXES.a2ml:compliance-tooling"
         grep -q 'effects-tooling = "ecological checking with sustainabot guidance"' .machine_readable/policies/MAINTENANCE-AXES.a2ml || MISSING="$MISSING MAINTENANCE-AXES.a2ml:effects-tooling"
         grep -q 'source-human = "docs/governance/MAINTENANCE-CHECKLIST.adoc"' .machine_readable/policies/MAINTENANCE-CHECKLIST.a2ml || MISSING="$MISSING MAINTENANCE-CHECKLIST.a2ml:source-human"
@@ -1093,12 +1088,12 @@ validate-rsr:
 
 # Validate STATE.a2ml syntax
 validate-state:
-    @if [ -f ".machine_readable/STATE.a2ml" ]; then \
-        grep -q '^\[metadata\]' .machine_readable/STATE.a2ml && \
-        grep -q 'project\s*=' .machine_readable/STATE.a2ml && \
+    @if [ -f ".machine_readable/descriptiles/STATE.a2ml" ]; then \
+        grep -q '^\[metadata\]' .machine_readable/descriptiles/STATE.a2ml && \
+        grep -q 'project\s*=' .machine_readable/descriptiles/STATE.a2ml && \
         echo "STATE.a2ml: valid" || echo "STATE.a2ml: INVALID (missing required sections)"; \
     else \
-        echo "No .machine_readable/STATE.a2ml found"; \
+        echo "No .machine_readable/descriptiles/STATE.a2ml found"; \
     fi
 
 # Validate AI installation guide completeness (finishbot pre-release check)
@@ -1175,14 +1170,14 @@ validate: validate-rsr validate-state validate-ai-install
 
 # Update STATE.a2ml timestamp
 state-touch:
-    @if [ -f ".machine_readable/STATE.a2ml" ]; then \
-        sed -i 's/last-updated = "[^"]*"/last-updated = "'"$(date +%Y-%m-%d)"'"/' .machine_readable/STATE.a2ml && \
+    @if [ -f ".machine_readable/descriptiles/STATE.a2ml" ]; then \
+        sed -i 's/last-updated = "[^"]*"/last-updated = "'"$(date +%Y-%m-%d)"'"/' .machine_readable/descriptiles/STATE.a2ml && \
         echo "STATE.a2ml timestamp updated"; \
     fi
 
 # Show current phase from STATE.a2ml
 state-phase:
-    @grep -oP 'phase\s*=\s*"\K[^"]+' .machine_readable/STATE.a2ml 2>/dev/null | head -1 || echo "unknown"
+    @grep -oP 'phase\s*=\s*"\K[^"]+' .machine_readable/descriptiles/STATE.a2ml 2>/dev/null | head -1 || echo "unknown"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # GUIX & GUIX
