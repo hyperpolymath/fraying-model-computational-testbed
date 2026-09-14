@@ -654,7 +654,7 @@ test-smoke:
     @echo "Smoke test..."
     # TODO: Add basic sanity checks
 
-# Run end-to-end tests (full pipeline: build → run → verify)
+# Report unimplemented end-to-end tests and exit with status 2
 e2e:
     @echo "E2E tests are not implemented. Start from tests/templates/e2e.sh.template." >&2
     @exit 2
