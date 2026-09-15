@@ -1,3 +1,4 @@
+# This workflow is managed by gh actions-lock.
 # SPDX-License-Identifier: MPL-2.0
 # // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 # SPDX-License-Identifier: MPL-2.0
@@ -8,7 +9,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: ['**']
   workflow_dispatch:
 permissions:
   actions: read
@@ -20,7 +21,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@v4.3.1
         with:
           persist-credentials: false
       - name: Check SECURITY.md exists and has substance
@@ -69,11 +70,11 @@ jobs:
             exit 1
           fi
 
-          if [ ! -f ".machine_readable/STATE.a2ml" ]; then
-            echo "::error::.machine_readable/STATE.a2ml is required"
+          if [ ! -f ".machine_readable/descriptiles/STATE.a2ml" ]; then
+            echo "::error::.machine_readable/descriptiles/STATE.a2ml is required"
             exit 1
           fi
-          echo ".machine_readable/STATE.a2ml: OK"
+          echo ".machine_readable/descriptiles/STATE.a2ml: OK"
       - name: Check CHANGELOG exists
         run: |
           if [ ! -f "CHANGELOG.md" ] && [ ! -f "CHANGELOG.adoc" ] && [ ! -f "CHANGES.md" ]; then
@@ -89,8 +90,8 @@ jobs:
           # Collect all required files that exist
           for f in SECURITY.md SECURITY.adoc .github/SECURITY.md LICENSE LICENSE.txt \
                    CONTRIBUTING.md CONTRIBUTING.adoc README.md README.adoc \
-                   .machine_readable/STATE.a2ml .machine_readable/META.a2ml \
-                   .machine_readable/ECOSYSTEM.a2ml CHANGELOG.md CHANGELOG.adoc; do
+                   .machine_readable/descriptiles/STATE.a2ml .machine_readable/descriptiles/META.a2ml \
+                   .machine_readable/descriptiles/ECOSYSTEM.a2ml CHANGELOG.md CHANGELOG.adoc; do
             [ -f "$f" ] && REQUIRED_FILES="$REQUIRED_FILES $f"
           done
 

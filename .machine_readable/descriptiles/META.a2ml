@@ -19,6 +19,8 @@ author = "Jonathan D.A. Jewell (hyperpolymath)"
 # - { id = "ADR-001", title = "Use Zig for FFI", status = "accepted", date = "2026-02-14" }
 
 [development-practices]
+code-review = "required"
+branch-protection = "enabled"
 build-tool = "just"
 container-runtime = "podman"
 ci-platform = "github-actions"

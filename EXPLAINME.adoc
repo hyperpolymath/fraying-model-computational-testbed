@@ -15,8 +15,8 @@ How this is implemented:
 
 * The local dispatcher (`session/dispatch.sh`) maps canonical commands to central
   protocol paths in `standards/session-management-standards`.
-* Local files (`session/custom-checks.k9`, `session/local-hooks.sh`,
-  `coordination.k9`) are integration-only.
+* Local files (`session/custom-checks.k9.ncl`, `session/local-hooks.sh`,
+  `coordination.k9.ncl`) are integration-only.
 
 Caveat:
 
