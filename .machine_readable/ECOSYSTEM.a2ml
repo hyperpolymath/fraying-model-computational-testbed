@@ -2,7 +2,7 @@
 ;; Ecosystem position and relationships
 (ecosystem
   (version "1.0.0")
-  (name "fraying-model-computational-testbed")
+  (name "{{REPO}}")
   (type "library")
-  (purpose "Enumerate global knot-resolution states and compute fragment-count distributions")
+  (purpose "{{REPO_DESCRIPTION}}")
   (related-projects))
