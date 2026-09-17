@@ -11,13 +11,8 @@ K9!
 let methodology_guard = {
   pedigree = {
     schema_version = "1.0.0",
-    metadata = {
-      name = "methodology-guard",
-      version = "1.0.0",
-    },
-    security = {
-      leash = 'Kennel,
-    },
+    name = "methodology-guard",
+    leash = 'Yard,
   },
 
   name = "methodology-guard",
@@ -55,7 +50,7 @@ let methodology_guard = {
     state_not_template = {
       description = "STATE.a2ml must not contain template placeholders",
       severity = "warning",
-      file = ".machine_readable/descriptiles/STATE.a2ml",
+      file = ".machine_readable/6a2/STATE.a2ml",
       reject_patterns = ["{{PLACEHOLDER}}", "{{PROJECT}}", "rsr-template-repo"],
     },
 

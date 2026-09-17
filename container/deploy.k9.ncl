@@ -145,12 +145,10 @@ echo "K9: Rollback complete."
 # Export the component
 {
   pedigree = component_pedigree & {
-    name = component_pedigree.metadata.name,
-    version = component_pedigree.metadata.version,
-    security = component_pedigree.security & {
-      leash = 'Hunt,
-      signature = component_pedigree.security.signature,
-    },
+    name = "{{SERVICE_NAME}}-deploy",
+    version = "{{VERSION}}",
+    leash = 'Hunt,
+    signature_required = true,
   },
   deployment = deployment,
   scripts = scripts,

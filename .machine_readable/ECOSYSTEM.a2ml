@@ -1,0 +1,8 @@
+;; SPDX-License-Identifier: MPL-2.0
+;; Ecosystem position and relationships
+(ecosystem
+  (version "1.0.0")
+  (name "fraying-model-computational-testbed")
+  (type "library")
+  (purpose "Enumerate global knot-resolution states and compute fragment-count distributions")
+  (related-projects))
