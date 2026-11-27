@@ -25,7 +25,7 @@
 
 # BANNED LANGUAGES
 # TypeScript -> ReScript
-# Node.js / npm / bun -> Deno
+# Node.js / npm -> Bun (tier 1); Deno is a permitted fallback
 # Go -> Rust
 # Python -> Julia or Rust
 
