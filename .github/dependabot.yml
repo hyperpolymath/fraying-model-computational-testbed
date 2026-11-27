@@ -54,9 +54,3 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 3
-
-  # Guix flakes
-  - package-ecosystem: "guix"
-    directory: "/"
-    schedule:
-      interval: "weekly"
